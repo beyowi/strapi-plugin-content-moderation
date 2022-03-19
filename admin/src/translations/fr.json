@@ -1,0 +1,9 @@
+{
+    "CheckboxConfirmation.Modal.body": "Voulez-vous désactiver la modération ?",
+    "CheckboxConfirmation.Modal.button-confirm": "Oui, désactivez",
+    "CheckboxConfirmation.Modal.content": "Désactiver la moderation engendre la suppression des statuts de modération sur tous vos contenus.",
+    "plugin.schema.moderation.moderated.description": "Permet de modérer le contenu",
+    "plugin.schema.moderation.moderated.description-content-type": "Permet de modérer le contenu",
+    "plugin.schema.moderation.moderated.label": "Activer la modération pour ce type de contenu",
+    "plugin.schema.moderation.moderated.label-content-type": "Activer la modération pour ce type de contenu"
+}

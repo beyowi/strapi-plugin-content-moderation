@@ -1,0 +1,24 @@
+{
+  "name": "strapi-plugin-content-moderation",
+  "version": "0.1.0",
+  "description": "This plugin allow the moderation of content",
+  "strapi": {
+    "name": "content-moderation",
+    "displayName": "Moderation",
+    "description": "This plugin allow the moderation of content",
+    "kind": "plugin"
+  },
+  "dependencies": {},
+  "author": {
+    "name": "Beyowi <info@beyowi.com> (https://beyowi.com/)"
+  },
+  "maintainers": [
+    "Beyowi <info@beyowi.com> (https://beyowi.com/)",
+    "Cedric Tang <cedric@beyowi.com> (https://beyowi.com/)"
+  ],
+  "engines": {
+    "node": ">=12.x. <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}

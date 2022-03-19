@@ -1,0 +1,9 @@
+{
+    "CheckboxConfirmation.Modal.body": "Do you want to disable it?",
+    "CheckboxConfirmation.Modal.button-confirm": "Yes, disable",
+    "CheckboxConfirmation.Modal.content": "Disabling moderation will engender the lost of moderation status information on all your content.",
+    "plugin.schema.moderation.moderated.description": "Allow you to moderate content",
+    "plugin.schema.moderation.moderated.description-content-type": "Allow you to moderate content",
+    "plugin.schema.moderation.moderated.label": "Enable moderation for this Content-Type",
+    "plugin.schema.moderation.moderated.label-content-type": "Enable moderation for this Content-Type"
+}
