@@ -8,7 +8,6 @@
     "description": "This plugin allow the moderation of content",
     "kind": "plugin"
   },
-  "dependencies": {},
   "author": {
     "name": "Beyowi <info@beyowi.com> (https://beyowi.com/)"
   },
@@ -20,5 +19,13 @@
     "node": ">=12.x. <=16.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "scripts": {
+    "postinstall": "husky install"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "husky": "^7.0.4"
+  }
 }
