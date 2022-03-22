@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const { prop } = require("lodash/fp");
+const { prop } = require('lodash/fp');
 
 const hasModeratedOption = (modelOrAttribute) => {
-  return prop("pluginOptions.moderation.moderated", modelOrAttribute) === true;
+  return prop('pluginOptions.moderation.moderated', modelOrAttribute) === true;
 };
 
 /**
@@ -15,6 +15,13 @@ const isModeratedContentType = (model) => {
   return hasModeratedOption(model);
 };
 
+const getModeratedContentTypes = () => {
+  return Object.values(strapi.contentTypes)
+    .filter((contentType) => isModeratedContentType(contentType))
+    .map((contentType) => contentType.uid);
+};
+
 module.exports = () => ({
+  getModeratedContentTypes,
   isModeratedContentType,
 });
