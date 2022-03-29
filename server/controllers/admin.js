@@ -4,38 +4,45 @@ const { getService } = require('../utils');
 const { APPROVAL_STATUS } = require('../utils/constants');
 
 module.exports = {
+  async findModeratedContentTypes(ctx) {
+    return getService('content-types').getModeratedContentTypes();
+  },
+
   async findAllPending(ctx) {
-    return getService('common').findAllPending();
+    const {
+      params: { slug },
+    } = ctx;
+
+    return getService('common').findAllPending(slug);
   },
 
   approve(ctx) {
-    const { params = {} } = ctx;
-    const { contentTypeName, id } = params;
+    const {
+      params: { slug, id },
+    } = ctx;
 
     return getService('common').updateStatus(
-      contentTypeName,
+      slug,
       id,
       APPROVAL_STATUS.APPROVED
     );
   },
 
   pending(ctx) {
-    const { params = {} } = ctx;
-    const { contentTypeName, id } = params;
+    const {
+      params: { slug, id },
+    } = ctx;
 
-    return getService('common').updateStatus(
-      contentTypeName,
-      id,
-      APPROVAL_STATUS.PENDING
-    );
+    return getService('common').updateStatus(slug, id, APPROVAL_STATUS.PENDING);
   },
 
   reject(ctx) {
-    const { params = {} } = ctx;
-    const { contentTypeName, id } = params;
+    const {
+      params: { slug, id },
+    } = ctx;
 
     return getService('common').updateStatus(
-      contentTypeName,
+      slug,
       id,
       APPROVAL_STATUS.REJECTED
     );

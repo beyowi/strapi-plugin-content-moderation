@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { useIntl } from "react-intl";
-import { Checkbox } from "@strapi/design-system/Checkbox";
-import { Dialog, DialogBody, DialogFooter } from "@strapi/design-system/Dialog";
-import { Typography } from "@strapi/design-system/Typography";
-import { Flex } from "@strapi/design-system/Flex";
-import { Stack } from "@strapi/design-system/Stack";
-import { Button } from "@strapi/design-system/Button";
-import ExclamationMarkCircle from "@strapi/icons/ExclamationMarkCircle";
-import { getTrad } from "../../utils";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useIntl } from 'react-intl';
+import { Checkbox } from '@strapi/design-system/Checkbox';
+import { Dialog, DialogBody, DialogFooter } from '@strapi/design-system/Dialog';
+import { Typography } from '@strapi/design-system/Typography';
+import { Flex } from '@strapi/design-system/Flex';
+import { Stack } from '@strapi/design-system/Stack';
+import { Button } from '@strapi/design-system/Button';
+import ExclamationMarkCircle from '@strapi/icons/ExclamationMarkCircle';
+import { getMessage } from '../../utils';
 
 const TextAlignTypography = styled(Typography)`
   text-align: center;
@@ -22,7 +22,7 @@ const CheckboxConfirmation = (asd) => {
 
   const handleChange = (value) => {
     if (isCreating || value) {
-      return onChange({ target: { name, value, type: "checkbox" } });
+      return onChange({ target: { name, value, type: 'checkbox' } });
     }
 
     if (!value) {
@@ -33,7 +33,7 @@ const CheckboxConfirmation = (asd) => {
   };
 
   const handleConfirm = () => {
-    onChange({ target: { name, value: false, type: "checkbox" } });
+    onChange({ target: { name, value: false, type: 'checkbox' } });
     setIsOpen(false);
   };
 
@@ -51,7 +51,7 @@ const CheckboxConfirmation = (asd) => {
         { id: description.id, defaultMessage: description.defaultMessage },
         { ...description.values }
       )
-    : "";
+    : '';
 
   return (
     <>
@@ -61,48 +61,41 @@ const CheckboxConfirmation = (asd) => {
         name={name}
         onValueChange={handleChange}
         value={value}
-        type="checkbox"
+        type='checkbox'
       >
         {label}
       </Checkbox>
       {isOpen && (
-        <Dialog onClose={handleToggle} title="Confirmation" isOpen={isOpen}>
+        <Dialog onClose={handleToggle} title='Confirmation' isOpen={isOpen}>
           <DialogBody icon={<ExclamationMarkCircle />}>
             <Stack size={2}>
-              <Flex justifyContent="center">
-                <TextAlignTypography id="confirm-description">
-                  {formatMessage({
-                    id: getTrad("CheckboxConfirmation.Modal.content"),
-                    defaultMessage:
-                      "Disabling moderation will engender the lost of moderation status information on all your content.",
-                  })}
+              <Flex justifyContent='center'>
+                <TextAlignTypography id='confirm-description'>
+                  {getMessage(
+                    'plugin.schema.moderation.moderated.checkbox.modal.content'
+                  )}
                 </TextAlignTypography>
               </Flex>
-              <Flex justifyContent="center">
-                <Typography fontWeight="semiBold" id="confirm-description">
-                  {formatMessage({
-                    id: getTrad("CheckboxConfirmation.Modal.body"),
-                    defaultMessage: "Do you want to disable it?",
-                  })}
+              <Flex justifyContent='center'>
+                <Typography fontWeight='semiBold' id='confirm-description'>
+                  {getMessage(
+                    'plugin.schema.moderation.moderated.checkbox.modal.body'
+                  )}
                 </Typography>
               </Flex>
             </Stack>
           </DialogBody>
           <DialogFooter
             startAction={
-              <Button onClick={handleToggle} variant="tertiary">
-                {formatMessage({
-                  id: "components.popUpWarning.button.cancel",
-                  defaultMessage: "No, cancel",
-                })}
+              <Button onClick={handleToggle} variant='tertiary'>
+                {getMessage('components.popUpWarning.button.cancel')}
               </Button>
             }
             endAction={
-              <Button variant="danger-light" onClick={handleConfirm}>
-                {formatMessage({
-                  id: getTrad("CheckboxConfirmation.Modal.button-confirm"),
-                  defaultMessage: "Yes, disable",
-                })}
+              <Button variant='danger-light' onClick={handleConfirm}>
+                {getMessage(
+                  'plugin.schema.moderation.moderated.checkbox.modal.button-confirm'
+                )}
               </Button>
             }
           />

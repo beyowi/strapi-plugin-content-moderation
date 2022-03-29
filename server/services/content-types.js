@@ -18,7 +18,11 @@ const isModeratedContentType = (model) => {
 const getModeratedContentTypes = () => {
   return Object.values(strapi.contentTypes)
     .filter((contentType) => isModeratedContentType(contentType))
-    .map((contentType) => contentType.uid);
+    .map((contentType) => ({
+      uid: contentType.uid,
+      displayName: contentType.info.displayName,
+      attributes: contentType.attributes,
+    }));
 };
 
 module.exports = () => ({

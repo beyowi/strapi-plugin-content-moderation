@@ -1,13 +1,14 @@
-import { prefixPluginTranslations } from "@strapi/helper-plugin";
-import pluginPkg from "../../package.json";
-import pluginId from "./pluginId";
-import Initializer from "./components/Initializer";
-import PluginIcon from "./components/PluginIcon";
-import addColumnToTableHook from "./contentManagerHooks/addColumnToTableHook";
-import mutateCTBContentTypeSchema from "./utils/mutateCTBContentTypeSchema";
-import CheckboxConfirmation from "./components/CheckboxConfirmation";
-import { getTrad } from "./utils";
-import * as yup from "yup";
+import { prefixPluginTranslations } from '@strapi/helper-plugin';
+import pluginPkg from '../../package.json';
+import pluginId from './pluginId';
+import Initializer from './components/Initializer';
+import PluginIcon from './components/PluginIcon';
+import addColumnToTableHook from './contentManagerHooks/addColumnToTableHook';
+import mutateCTBContentTypeSchema from './utils/mutateCTBContentTypeSchema';
+import CheckboxConfirmation from './components/CheckboxConfirmation';
+import { getMessage } from './utils';
+import * as yup from 'yup';
+import reducers from './reducers';
 
 const name = pluginPkg.strapi.displayName;
 
@@ -22,7 +23,7 @@ export default {
       },
       Component: async () => {
         const component = await import(
-          /* webpackChunkName: "[request]" */ "./pages/App"
+          /* webpackChunkName: "[request]" */ './pages/App'
         );
 
         return component;
@@ -35,6 +36,7 @@ export default {
         // },
       ],
     });
+    app.addReducers(reducers);
     app.registerPlugin({
       id: pluginId,
       initializer: Initializer,
@@ -46,17 +48,17 @@ export default {
   bootstrap(app) {
     // Hook that adds a column into the CM's LV table
     app.registerHook(
-      "Admin/CM/pages/ListView/inject-column-in-table",
+      'Admin/CM/pages/ListView/inject-column-in-table',
       addColumnToTableHook
     );
 
-    const ctbPlugin = app.getPlugin("content-type-builder");
+    const ctbPlugin = app.getPlugin('content-type-builder');
 
     if (ctbPlugin) {
       const ctbFormsAPI = ctbPlugin.apis.forms;
       ctbFormsAPI.addContentTypeSchemaMutation(mutateCTBContentTypeSchema);
       ctbFormsAPI.components.add({
-        id: "checkboxConfirmation",
+        id: 'checkboxConfirmation',
         component: CheckboxConfirmation,
       });
 
@@ -70,19 +72,19 @@ export default {
           advanced() {
             return [
               {
-                name: "pluginOptions.moderation.moderated",
+                name: 'pluginOptions.moderation.moderated',
                 description: {
-                  id: getTrad(
-                    "plugin.schema.moderation.moderated.description-content-type"
+                  id: 'plugin.schema.moderation.moderated.description-content-type',
+                  defaultMessage: getMessage(
+                    'plugin.schema.moderation.moderated.description-content-type'
                   ),
-                  defaultMessage: "Allow you to keep moderate content",
                 },
-                type: "checkboxConfirmation",
+                type: 'checkboxConfirmation',
                 intlLabel: {
-                  id: getTrad(
-                    "plugin.schema.moderation.moderated.label-content-type"
+                  id: 'plugin.schema.moderation.moderated.label-content-type',
+                  defaultMessage: getMessage(
+                    'plugin.schema.moderation.moderated.label-content-type'
                   ),
-                  defaultMessage: "Enable moderation for this Content-Type",
                 },
               },
             ];

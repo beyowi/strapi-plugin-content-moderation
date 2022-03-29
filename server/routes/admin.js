@@ -3,7 +3,16 @@
 module.exports = [
   {
     method: 'GET',
-    path: '/find-all-pending',
+    path: '/find-content-types',
+    handler: 'admin.findModeratedContentTypes',
+    config: {
+      auth: false,
+      policies: [],
+    },
+  },
+  {
+    method: 'GET',
+    path: '/find-all-pending/:slug',
     handler: 'admin.findAllPending',
     config: {
       auth: false,
@@ -12,7 +21,7 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/:contentTypeName/:id/approve',
+    path: '/:slug/:id/approve',
     handler: 'admin.approve',
     config: {
       auth: false,
@@ -21,7 +30,7 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/:contentTypeName/:id/pending',
+    path: '/:slug/:id/pending',
     handler: 'admin.pending',
     config: {
       auth: false,
@@ -30,7 +39,7 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/:contentTypeName/:id/reject',
+    path: '/:slug/:id/reject',
     handler: 'admin.reject',
     config: {
       auth: false,

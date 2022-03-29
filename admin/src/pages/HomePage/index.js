@@ -4,13 +4,21 @@
  *
  */
 
-import React, { memo } from "react";
-// import PropTypes from 'prop-types';
-import pluginId from "../../pluginId";
-import Moderation from "../../components/Moderation";
+import React, { memo } from 'react';
+
+import { Layout } from '@strapi/design-system/Layout';
+import { Box } from '@strapi/design-system/Box';
+import ContentNav from '../../components/ContentNav';
+import ContentViewer from '../../components/ContentViewer';
 
 const HomePage = () => {
-  return <Moderation />;
+  return (
+    <Box background='neutral100'>
+      <Layout sideNav={<ContentNav />}>
+        <ContentViewer />
+      </Layout>
+    </Box>
+  );
 };
 
 export default memo(HomePage);
