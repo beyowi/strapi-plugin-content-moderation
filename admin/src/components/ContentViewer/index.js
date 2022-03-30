@@ -31,7 +31,6 @@ const ContentViewer = ({ contentTypes }) => {
   const {
     params: { contentType },
   } = useRouteMatch(getUrl(`:contentType`));
-
   const filtersSchema = [];
 
   const toggleNotification = useNotification();
@@ -64,7 +63,7 @@ const ContentViewer = ({ contentTypes }) => {
   return (
     <Box background='neutral100'>
       <Layout>
-        {isLoading || isFetching ? (
+        {isLoading ? (
           <LoadingIndicatorPage />
         ) : (
           <>
