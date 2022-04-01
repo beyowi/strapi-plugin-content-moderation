@@ -21,7 +21,7 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/:slug/:id/approve',
+    path: '/:slug/:id/approved',
     handler: 'admin.approve',
     config: {
       auth: false,
@@ -39,7 +39,7 @@ module.exports = [
   },
   {
     method: 'POST',
-    path: '/:slug/:id/reject',
+    path: '/:slug/:id/rejected',
     handler: 'admin.reject',
     config: {
       auth: false,

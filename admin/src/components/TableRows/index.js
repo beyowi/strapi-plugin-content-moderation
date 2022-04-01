@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { memo } from 'react';
+
 import PropTypes from 'prop-types';
 import { Box } from '@strapi/design-system/Box';
-import { IconButton } from '@strapi/design-system/IconButton';
 import { Tbody, Td, Tr } from '@strapi/design-system/Table';
 import { Flex } from '@strapi/design-system/Flex';
-import Duplicate from '@strapi/icons/Duplicate';
-import Pencil from '@strapi/icons/Pencil';
-import {
-  useTracking,
-  stopPropagation,
-  onRowClick,
-} from '@strapi/helper-plugin';
+import Check from '@strapi/icons/Check';
+import Cross from '@strapi/icons/Cross';
+import Clock from '@strapi/icons/Clock';
+
+import { stopPropagation, onRowClick } from '@strapi/helper-plugin';
 import { useHistory } from 'react-router-dom';
 import CellContent from '../CellContent';
-import { getMessage } from '../../utils';
+import {
+  APPROVED_STATUS,
+  PENDING_STATUS,
+  REJECTED_STATUS,
+} from '../../utils/constants';
+import ActionBtn from './ActionBtn';
 
 const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
   const {
@@ -21,11 +24,9 @@ const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
     location: { pathname },
   } = useHistory();
 
-  const { trackUsage } = useTracking();
-
   return (
     <Tbody>
-      {rows.map((data, index) => {
+      {rows.map((data) => {
         return (
           <Tr
             key={data.id}
@@ -51,45 +52,34 @@ const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
             {withBulkActions && (
               <Td>
                 <Flex justifyContent='end' {...stopPropagation}>
-                  <IconButton
-                    onClick={() => {
-                      trackUsage('willEditEntryFromButton');
-                      push({
-                        pathname: `${pathname}/${data.id}`,
-                        state: { from: pathname },
-                      });
-                    }}
-                    label={getMessage('page.viewer.table.item.approve')}
-                    noBorder
-                    icon={<Pencil />}
-                  />
-
-                  <Box paddingLeft={1}>
-                    <IconButton
-                      onClick={() => {
-                        push({
-                          pathname: `${pathname}/create/clone/${data.id}`,
-                          state: { from: pathname },
-                        });
-                      }}
-                      label={getMessage('page.viewer.table.item.pending')}
-                      noBorder
-                      icon={<Duplicate />}
+                  {data.moderation_status !== APPROVED_STATUS ? (
+                    <ActionBtn
+                      contentType={contentType}
+                      id={data.id}
+                      actionStatus={APPROVED_STATUS}
+                      icon={<Check />}
                     />
-                  </Box>
-                  <Box paddingLeft={1}>
-                    <IconButton
-                      onClick={() => {
-                        push({
-                          pathname: `${pathname}/create/clone/${data.id}`,
-                          state: { from: pathname },
-                        });
-                      }}
-                      label={getMessage('page.viewer.table.item.reject')}
-                      noBorder
-                      icon={<Duplicate />}
-                    />
-                  </Box>
+                  ) : null}
+                  {data.moderation_status !== PENDING_STATUS ? (
+                    <Box paddingLeft={1}>
+                      <ActionBtn
+                        contentType={contentType}
+                        id={data.id}
+                        actionStatus={PENDING_STATUS}
+                        icon={<Clock />}
+                      />
+                    </Box>
+                  ) : null}
+                  {data.moderation_status !== REJECTED_STATUS ? (
+                    <Box paddingLeft={1}>
+                      <ActionBtn
+                        contentType={contentType}
+                        id={data.id}
+                        actionStatus={REJECTED_STATUS}
+                        icon={<Cross />}
+                      />
+                    </Box>
+                  ) : null}
                 </Flex>
               </Td>
             )}
@@ -112,4 +102,4 @@ TableRows.propTypes = {
   withBulkActions: PropTypes.bool,
 };
 
-export default TableRows;
+export default memo(TableRows);

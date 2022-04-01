@@ -24,10 +24,11 @@ import { VisuallyHidden } from '@strapi/design-system/VisuallyHidden';
 import TableRows from '../TableRows';
 import TableFilters from '../TableFilters';
 import makeAppView from '../../pages/App/reducer/selectors';
-import { fetchAllPending } from '../../utils/api';
+import { fetchAllStatus } from '../../utils/api';
 import { getMessage } from '../../utils';
+import { setContentData } from '../../pages/App/reducer/actions';
 
-const ContentViewer = ({ contentTypes }) => {
+const ContentViewer = ({ contentTypes, contentData, setContentData }) => {
   const {
     params: { contentType },
   } = useRouteMatch(getUrl(`:contentType`));
@@ -35,11 +36,14 @@ const ContentViewer = ({ contentTypes }) => {
 
   const toggleNotification = useNotification();
 
-  const { isLoading, data, isFetching, refetch } = useQuery(
+  const { isLoading, refetch } = useQuery(
     'get-content-data',
-    () => fetchAllPending(toggleNotification, contentType),
+    () => fetchAllStatus(toggleNotification, contentType, 'pending'),
     {
       initialData: {},
+      onSuccess: (response) => {
+        setContentData(response);
+      },
     }
   );
 
@@ -52,7 +56,7 @@ const ContentViewer = ({ contentTypes }) => {
   )[0];
   const attributes = activeContentType.attributes;
 
-  const total = data?.length;
+  const total = contentData?.length;
 
   let tableHeaders = [];
   Object.keys(attributes).forEach((key) => {
@@ -83,14 +87,11 @@ const ContentViewer = ({ contentTypes }) => {
               }
             />
             <ContentLayout>
-              {!isEmpty(data) ? (
-                <Table
-                  colCount={tableHeaders.length + 1}
-                  rowCount={data.length}
-                >
+              {!isEmpty(contentData) ? (
+                <Table colCount={tableHeaders.length + 1} rowCount={total}>
                   <Thead>
                     <Tr>
-                      {tableHeaders.map((header, index) => {
+                      {tableHeaders.map((header) => {
                         return (
                           <Th key={`${header.name}Header`}>
                             <Typography variant='sigma'>
@@ -109,7 +110,7 @@ const ContentViewer = ({ contentTypes }) => {
                   <TableRows
                     contentType={contentType}
                     headers={tableHeaders}
-                    rows={data}
+                    rows={contentData}
                     withBulkActions
                   />
                 </Table>
@@ -130,7 +131,7 @@ const ContentViewer = ({ contentTypes }) => {
 const mapStateToProps = makeAppView();
 
 export function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ setContentData }, dispatch);
 }
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
