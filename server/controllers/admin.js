@@ -8,12 +8,13 @@ module.exports = {
     return getService('content-types').getModeratedContentTypes();
   },
 
-  async findAllPending(ctx) {
+  async findAll(ctx) {
     const {
       params: { slug },
+      query,
     } = ctx;
 
-    return getService('common').findAllPending(slug);
+    return getService('common').findAll(slug, query);
   },
 
   approve(ctx) {

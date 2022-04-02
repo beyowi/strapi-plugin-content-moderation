@@ -14,6 +14,7 @@ import {
 import { Flex } from '@strapi/design-system/Flex';
 import { Box } from '@strapi/design-system/Box';
 import { getMessage } from '../../utils';
+import { DEFAULT_ROUTE_FILTER_PENDING } from '../../utils/constants';
 
 const ContentNav = ({ contentTypes }) => {
   const [search, setSearch] = useState('');
@@ -34,7 +35,10 @@ const ContentNav = ({ contentTypes }) => {
               badgeLabel={contentTypes.length.toString()}
             >
               {contentTypes.map((type, index) => (
-                <SubNavLink to={type.uid} key={index}>
+                <SubNavLink
+                  to={`${type.uid}${DEFAULT_ROUTE_FILTER_PENDING}`}
+                  key={index}
+                >
                   {type.displayName}
                 </SubNavLink>
               ))}

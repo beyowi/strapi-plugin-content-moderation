@@ -12,8 +12,8 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/find-all-pending/:slug',
-    handler: 'admin.findAllPending',
+    path: '/:slug/find-all',
+    handler: 'admin.findAll',
     config: {
       auth: false,
       policies: [],

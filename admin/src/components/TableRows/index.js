@@ -18,7 +18,13 @@ import {
 } from '../../utils/constants';
 import ActionBtn from './ActionBtn';
 
-const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
+const TableRows = ({
+  contentType,
+  headers,
+  withBulkActions,
+  refetchData,
+  rows,
+}) => {
   const {
     push,
     location: { pathname },
@@ -57,6 +63,7 @@ const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
                       contentType={contentType}
                       id={data.id}
                       actionStatus={APPROVED_STATUS}
+                      refetchData={refetchData}
                       icon={<Check />}
                     />
                   ) : null}
@@ -66,6 +73,7 @@ const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
                         contentType={contentType}
                         id={data.id}
                         actionStatus={PENDING_STATUS}
+                        refetchData={refetchData}
                         icon={<Clock />}
                       />
                     </Box>
@@ -76,6 +84,7 @@ const TableRows = ({ contentType, headers, withBulkActions, rows }) => {
                         contentType={contentType}
                         id={data.id}
                         actionStatus={REJECTED_STATUS}
+                        refetchData={refetchData}
                         icon={<Cross />}
                       />
                     </Box>
@@ -94,12 +103,14 @@ TableRows.defaultProps = {
   rows: [],
   headers: [],
   withBulkActions: false,
+  refetch: () => {},
 };
 
 TableRows.propTypes = {
   headers: PropTypes.array.isRequired,
   rows: PropTypes.array,
   withBulkActions: PropTypes.bool,
+  refetch: PropTypes.func,
 };
 
 export default memo(TableRows);

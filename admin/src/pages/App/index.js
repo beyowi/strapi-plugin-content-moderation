@@ -20,6 +20,7 @@ import { setContentTypes } from './reducer/actions';
 import makeAppView from './reducer/selectors';
 import HomePage from '../HomePage';
 import getUrl from '../../utils/getUrl';
+import { DEFAULT_ROUTE_FILTER_PENDING } from '../../utils/constants';
 
 const App = ({ setContentTypes, contentTypes }) => {
   const contentTypeMatch = useRouteMatch(getUrl(`:uid`));
@@ -42,7 +43,11 @@ const App = ({ setContentTypes, contentTypes }) => {
   }
 
   if (!contentTypeMatch && contentTypes.length > 0) {
-    return <Redirect to={getUrl(`${contentTypes[0].uid}`)} />;
+    return (
+      <Redirect
+        to={getUrl(`${contentTypes[0].uid}${DEFAULT_ROUTE_FILTER_PENDING}`)}
+      />
+    );
   }
 
   return (

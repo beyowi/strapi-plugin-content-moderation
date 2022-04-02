@@ -1,3 +1,5 @@
+import { stringify } from 'qs';
+
 import { axiosInstance, handleAPIError } from './';
 import pluginId from '../pluginId';
 
@@ -10,10 +12,12 @@ export const fetchModeratedContentTypes = async (toggleNotification) => {
   }
 };
 
-export const fetchAllStatus = async (toggleNotification, slug, status) => {
+export const fetchData = async (toggleNotification, slug, queryParams) => {
   try {
     const { data } = await axiosInstance.get(
-      `/${pluginId}/find-all-${status}/${slug}`
+      `/${pluginId}/${slug}/find-all${
+        queryParams ? `?${stringify(queryParams, { encode: false })}` : ''
+      }`
     );
     return data;
   } catch (err) {
