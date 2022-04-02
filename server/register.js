@@ -19,7 +19,7 @@ const extendModeratedContentTypes = (strapi) => {
     if (contentTypeService.isModeratedContentType(contentType)) {
       const { attributes } = contentType;
 
-      _.set(attributes, 'moderation_status', {
+      _.set(attributes, 'moderationStatus', {
         writable: true,
         private: false,
         configurable: false,

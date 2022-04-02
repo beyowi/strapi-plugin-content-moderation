@@ -5,7 +5,7 @@ import {
 } from '../../utils/constants';
 const filtersSchema = [
   {
-    name: 'moderation_status',
+    name: 'moderationStatus',
     metadatas: { label: 'status' },
     fieldSchema: {
       type: 'enumeration',

@@ -1,9 +1,9 @@
-import get from "lodash/get";
+import get from 'lodash/get';
 
 const addColumnToTableHook = ({ displayedHeaders, layout }) => {
   const moderationActivated = get(
     layout,
-    "contentType.pluginOptions.moderation.moderated",
+    'contentType.pluginOptions.moderation.moderated',
     false
   );
 
@@ -15,14 +15,14 @@ const addColumnToTableHook = ({ displayedHeaders, layout }) => {
     displayedHeaders: [
       ...displayedHeaders,
       {
-        key: "__moderation_status_key__",
-        fieldSchema: { type: "string" },
+        key: '__moderationStatus_key__',
+        fieldSchema: { type: 'string' },
         metadatas: {
-          label: "Moderation status",
+          label: 'Moderation status',
           searchable: true,
           sortable: true,
         },
-        name: "moderationStatus",
+        name: 'moderationStatus',
         cellFormatter: (props) => props.moderationStatus,
       },
     ],

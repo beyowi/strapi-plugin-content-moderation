@@ -34,7 +34,7 @@ module.exports = ({ strapi }) => ({
     return await strapi.db.query(slug).update({
       where: { id: contentId },
       data: {
-        moderation_status: newStatus,
+        moderationStatus: newStatus,
       },
     });
   },

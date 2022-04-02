@@ -58,7 +58,7 @@ const TableRows = ({
             {withBulkActions && (
               <Td>
                 <Flex justifyContent='end' {...stopPropagation}>
-                  {data.moderation_status !== APPROVED_STATUS ? (
+                  {data.moderationStatus !== APPROVED_STATUS ? (
                     <ActionBtn
                       contentType={contentType}
                       id={data.id}
@@ -67,7 +67,7 @@ const TableRows = ({
                       icon={<Check />}
                     />
                   ) : null}
-                  {data.moderation_status !== PENDING_STATUS ? (
+                  {data.moderationStatus !== PENDING_STATUS ? (
                     <Box paddingLeft={1}>
                       <ActionBtn
                         contentType={contentType}
@@ -78,7 +78,7 @@ const TableRows = ({
                       />
                     </Box>
                   ) : null}
-                  {data.moderation_status !== REJECTED_STATUS ? (
+                  {data.moderationStatus !== REJECTED_STATUS ? (
                     <Box paddingLeft={1}>
                       <ActionBtn
                         contentType={contentType}
