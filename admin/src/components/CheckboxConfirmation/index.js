@@ -88,7 +88,9 @@ const CheckboxConfirmation = (asd) => {
           <DialogFooter
             startAction={
               <Button onClick={handleToggle} variant='tertiary'>
-                {getMessage('components.popUpWarning.button.cancel')}
+                {getMessage(
+                  'plugin.schema.moderation.moderated.checkbox.modal.button-cancel'
+                )}
               </Button>
             }
             endAction={

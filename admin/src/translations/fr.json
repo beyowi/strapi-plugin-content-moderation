@@ -15,6 +15,7 @@
     "page.viewer.table.item.rejected": "Rejeter",
     "plugin.name": "Modération",
     "plugin.schema.moderation.moderated.checkbox.modal.body": "Voulez-vous désactiver la modération?",
+    "plugin.schema.moderation.moderated.checkbox.modal.button-cancel": "Non, annulez",
     "plugin.schema.moderation.moderated.checkbox.modal.button-confirm": "Oui, désactivez",
     "plugin.schema.moderation.moderated.checkbox.modal.content": "Désactiver la moderation engendre la suppression des statuts de modération sur tous vos contenus.",
     "plugin.schema.moderation.moderated.description": "Permet de modérer le contenu",
