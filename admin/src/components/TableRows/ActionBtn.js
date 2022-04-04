@@ -6,7 +6,14 @@ import { changeContentStatus } from '../../utils/api';
 import { getMessage } from '../../utils';
 import { IconButton } from '@strapi/design-system/IconButton';
 
-const ActionBtn = ({ contentType, id, actionStatus, icon, refetchData }) => {
+const ActionBtn = ({
+  contentType,
+  id,
+  actionStatus,
+  publishedAt,
+  icon,
+  refetchData,
+}) => {
   const { trackUsage } = useTracking();
 
   const toggleNotification = useNotification();
@@ -14,7 +21,13 @@ const ActionBtn = ({ contentType, id, actionStatus, icon, refetchData }) => {
   const { refetch } = useQuery(
     `set-content-${id}-status-${actionStatus}`,
     () =>
-      changeContentStatus(toggleNotification, contentType, id, actionStatus),
+      changeContentStatus(
+        toggleNotification,
+        contentType,
+        id,
+        actionStatus,
+        publishedAt
+      ),
     {
       enabled: false,
       retry: false,

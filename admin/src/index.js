@@ -3,7 +3,6 @@ import pluginPkg from '../../package.json';
 import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
-import addColumnToTableHook from './contentManagerHooks/addColumnToTableHook';
 import mutateCTBContentTypeSchema from './utils/mutateCTBContentTypeSchema';
 import CheckboxConfirmation from './components/CheckboxConfirmation';
 import { getMessage } from './utils';
@@ -46,12 +45,6 @@ export default {
   },
 
   bootstrap(app) {
-    // Hook that adds a column into the CM's LV table
-    app.registerHook(
-      'Admin/CM/pages/ListView/inject-column-in-table',
-      addColumnToTableHook
-    );
-
     // Add form to activate plugin in content-builder
     const ctbPlugin = app.getPlugin('content-type-builder');
 

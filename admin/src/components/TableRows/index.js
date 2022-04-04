@@ -1,21 +1,22 @@
 import React, { memo } from 'react';
 
 import PropTypes from 'prop-types';
+
+import {
+  stopPropagation,
+  onRowClick,
+  useTracking,
+} from '@strapi/helper-plugin';
+import { useHistory } from 'react-router-dom';
+
 import { Box } from '@strapi/design-system/Box';
 import { Tbody, Td, Tr } from '@strapi/design-system/Table';
 import { Flex } from '@strapi/design-system/Flex';
 import Check from '@strapi/icons/Check';
 import Cross from '@strapi/icons/Cross';
 import Clock from '@strapi/icons/Clock';
-
-import { stopPropagation, onRowClick } from '@strapi/helper-plugin';
-import { useHistory } from 'react-router-dom';
 import CellContent from '../CellContent';
-import {
-  APPROVED_STATUS,
-  PENDING_STATUS,
-  REJECTED_STATUS,
-} from '../../utils/constants';
+import { MODERATION_STATUS } from '../../utils/constants';
 import ActionBtn from './ActionBtn';
 import { getMessage } from '../../utils';
 
@@ -30,6 +31,8 @@ const TableRows = ({
     push,
     location: { pathname },
   } = useHistory();
+
+  const { trackUsage } = useTracking();
 
   return (
     <Tbody>
@@ -63,34 +66,37 @@ const TableRows = ({
             {withBulkActions && (
               <Td>
                 <Flex justifyContent='end' {...stopPropagation}>
-                  {data.moderationStatus !== APPROVED_STATUS ? (
+                  {data.moderationStatus !== MODERATION_STATUS.APPROVED ? (
                     <ActionBtn
                       contentType={contentType}
                       id={data.id}
-                      actionStatus={APPROVED_STATUS}
+                      actionStatus={MODERATION_STATUS.APPROVED}
                       refetchData={refetchData}
                       icon={<Check />}
+                      publishedAt={data.publishedAt}
                     />
                   ) : null}
-                  {data.moderationStatus !== PENDING_STATUS ? (
+                  {data.moderationStatus !== MODERATION_STATUS.PENDING ? (
                     <Box paddingLeft={1}>
                       <ActionBtn
                         contentType={contentType}
                         id={data.id}
-                        actionStatus={PENDING_STATUS}
+                        actionStatus={MODERATION_STATUS.PENDING}
                         refetchData={refetchData}
                         icon={<Clock />}
+                        publishedAt={data.publishedAt}
                       />
                     </Box>
                   ) : null}
-                  {data.moderationStatus !== REJECTED_STATUS ? (
+                  {data.moderationStatus !== MODERATION_STATUS.REJECTED ? (
                     <Box paddingLeft={1}>
                       <ActionBtn
                         contentType={contentType}
                         id={data.id}
-                        actionStatus={REJECTED_STATUS}
+                        actionStatus={MODERATION_STATUS.REJECTED}
                         refetchData={refetchData}
                         icon={<Cross />}
+                        publishedAt={data.publishedAt}
                       />
                     </Box>
                   ) : null}

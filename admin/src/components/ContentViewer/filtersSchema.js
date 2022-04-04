@@ -1,15 +1,15 @@
-import {
-  APPROVED_STATUS,
-  PENDING_STATUS,
-  REJECTED_STATUS,
-} from '../../utils/constants';
+import { MODERATION_STATUS } from '../../utils/constants';
 const filtersSchema = [
   {
     name: 'moderationStatus',
     metadatas: { label: 'status' },
     fieldSchema: {
       type: 'enumeration',
-      options: [APPROVED_STATUS, PENDING_STATUS, REJECTED_STATUS],
+      options: [
+        MODERATION_STATUS.APPROVED,
+        MODERATION_STATUS.PENDING,
+        MODERATION_STATUS.REJECTED,
+      ],
     },
   },
 ];

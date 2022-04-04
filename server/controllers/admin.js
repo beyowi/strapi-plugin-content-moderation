@@ -1,7 +1,7 @@
 'use strict';
 
 const { getService } = require('../utils');
-const { APPROVAL_STATUS } = require('../utils/constants');
+const { MODERATION_STATUS } = require('../utils/constants');
 
 module.exports = {
   async findModeratedContentTypes(ctx) {
@@ -25,7 +25,7 @@ module.exports = {
     return getService('common').updateStatus(
       slug,
       id,
-      APPROVAL_STATUS.APPROVED
+      MODERATION_STATUS.APPROVED
     );
   },
 
@@ -34,7 +34,11 @@ module.exports = {
       params: { slug, id },
     } = ctx;
 
-    return getService('common').updateStatus(slug, id, APPROVAL_STATUS.PENDING);
+    return getService('common').updateStatus(
+      slug,
+      id,
+      MODERATION_STATUS.PENDING
+    );
   },
 
   reject(ctx) {
@@ -45,7 +49,7 @@ module.exports = {
     return getService('common').updateStatus(
       slug,
       id,
-      APPROVAL_STATUS.REJECTED
+      MODERATION_STATUS.REJECTED
     );
   },
 };

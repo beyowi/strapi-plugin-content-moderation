@@ -2,6 +2,7 @@ import { stringify } from 'qs';
 
 import { axiosInstance, handleAPIError } from './';
 import pluginId from '../pluginId';
+import { MODERATION_STATUS } from './constants';
 
 export const fetchModeratedContentTypes = async (toggleNotification) => {
   try {
@@ -29,9 +30,23 @@ export const changeContentStatus = async (
   toggleNotification,
   slug,
   id,
-  status
+  status,
+  publishedAt
 ) => {
   try {
+    // Some content might not be publishable (like Users for example)
+    if (publishedAt !== undefined) {
+      if (status == MODERATION_STATUS.APPROVED && !publishedAt) {
+        await axiosInstance.post(
+          `/content-manager/collection-types/${slug}/${id}/actions/publish`
+        );
+      } else if (status != MODERATION_STATUS.APPROVED && publishedAt !== null) {
+        await axiosInstance.post(
+          `/content-manager/collection-types/${slug}/${id}/actions/unpublish`
+        );
+      }
+    }
+
     const response = await axiosInstance.post(
       `/${pluginId}/${slug}/${id}/${status}`
     );

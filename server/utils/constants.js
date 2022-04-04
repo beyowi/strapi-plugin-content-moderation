@@ -1,9 +1,9 @@
-const APPROVAL_STATUS = {
-  PENDING: 'pending',
+const MODERATION_STATUS = {
   APPROVED: 'approved',
+  PENDING: 'pending',
   REJECTED: 'rejected',
 };
 
 module.exports = {
-  APPROVAL_STATUS,
+  MODERATION_STATUS,
 };
