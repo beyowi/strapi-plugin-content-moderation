@@ -17,6 +17,7 @@ import {
   REJECTED_STATUS,
 } from '../../utils/constants';
 import ActionBtn from './ActionBtn';
+import { getMessage } from '../../utils';
 
 const TableRows = ({
   contentType,
@@ -48,9 +49,13 @@ const TableRows = ({
             })}
           >
             {headers.map(({ name, type }) => {
+              const displayData =
+                name === 'moderationStatus' && data[name] != null
+                  ? getMessage(`page.viewer.table.item.${data[name]}`)
+                  : data[name];
               return (
                 <Td key={`${name}Value`}>
-                  <CellContent content={data[name]} type={type} />
+                  <CellContent content={displayData} type={type} />
                 </Td>
               );
             })}

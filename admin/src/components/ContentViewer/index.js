@@ -69,6 +69,7 @@ const ContentViewer = ({ contentTypes }) => {
     if (attributes[key].visible === undefined)
       tableHeaders.push({ name: key, ...attributes[key] });
   });
+  tableHeaders.push({ name: 'moderationStatus', type: 'string' });
 
   return (
     <Box background='neutral100'>

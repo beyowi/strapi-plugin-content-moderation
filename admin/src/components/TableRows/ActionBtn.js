@@ -31,7 +31,7 @@ const ActionBtn = ({ contentType, id, actionStatus, icon, refetchData }) => {
         trackUsage(`moderationContent${actionStatus}`);
         refetch();
       }}
-      label={getMessage(`page.viewer.table.item.${actionStatus}`)}
+      label={getMessage(`page.viewer.table.action.${actionStatus}`)}
       noBorder
       icon={icon}
     />
