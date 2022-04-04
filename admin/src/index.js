@@ -52,6 +52,7 @@ export default {
       addColumnToTableHook
     );
 
+    // Add form to activate plugin in content-builder
     const ctbPlugin = app.getPlugin('content-type-builder');
 
     if (ctbPlugin) {

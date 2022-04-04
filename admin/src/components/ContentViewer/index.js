@@ -64,9 +64,15 @@ const ContentViewer = ({ contentTypes }) => {
 
   const total = result?.length;
 
+  const hideColumnsType = ['media', 'relation', 'component'];
+
   let tableHeaders = [];
   Object.keys(attributes).forEach((key) => {
-    if (attributes[key].visible === undefined)
+    if (
+      attributes[key].visible === undefined &&
+      !attributes[key].private &&
+      !hideColumnsType.includes(attributes[key].type)
+    )
       tableHeaders.push({ name: key, ...attributes[key] });
   });
   tableHeaders.push({ name: 'moderationStatus', type: 'string' });
