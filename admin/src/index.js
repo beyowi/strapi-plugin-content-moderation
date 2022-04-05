@@ -5,6 +5,7 @@ import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
 import mutateCTBContentTypeSchema from './utils/mutateCTBContentTypeSchema';
 import CheckboxConfirmation from './components/CheckboxConfirmation';
+import ContentViewInfos from './components/ContentViewInfos';
 import { getMessage } from './utils';
 import * as yup from 'yup';
 import reducers from './reducers';
@@ -45,6 +46,12 @@ export default {
   },
 
   bootstrap(app) {
+    // Add moderation information and actions in the editView
+    app.injectContentManagerComponent('editView', 'right-links', {
+      name: 'Moderation',
+      Component: ContentViewInfos,
+    });
+
     // Add form to activate plugin in content-builder
     const ctbPlugin = app.getPlugin('content-type-builder');
 
