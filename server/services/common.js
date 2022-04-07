@@ -2,6 +2,8 @@
 
 const { first, isArray, isNil } = require('lodash');
 
+const { getService } = require('../utils');
+
 const { MODERATION_STATUS } = require('../utils/constants');
 const approvedContentTemplate = require('../config/email-templates/approved-content');
 const approvedUserTemplate = require('../config/email-templates/approved-user');
@@ -23,7 +25,18 @@ module.exports = ({ strapi }) => ({
   // Find all content
   async findAll(slug, query) {
     const { pageSize = 10, page = 1, filters } = query;
+    const fieldConfig = this.getConfig('contentListFields');
+    const fieldsList =
+      slug in fieldConfig ? fieldConfig[slug] : fieldConfig['*'];
+    const contentTypeData =
+      getService('content-types').getContentTypeData(slug);
+
+    let existingFields = Object.keys(contentTypeData.attributes).filter(
+      (_) => fieldsList === _ || fieldsList.includes(_)
+    );
+
     let params = {
+      select: ['id', 'moderationStatus', ...existingFields],
       where: {
         ...filters,
       },
@@ -83,11 +96,8 @@ module.exports = ({ strapi }) => ({
               .filter((_) => _)
           );
 
-          const contentTypeData = first(
-            Object.values(strapi.contentTypes).filter(
-              (contentType) => contentType.uid === slug
-            )
-          );
+          const contentTypeData =
+            getService('content-types').getContentTypeData(slug);
 
           emailAddr = response.createdBy.email;
           emailTemplate =
