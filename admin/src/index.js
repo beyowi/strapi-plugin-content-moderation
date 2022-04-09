@@ -9,6 +9,7 @@ import ContentViewInfos from './components/ContentViewInfos';
 import { getMessage } from './utils';
 import * as yup from 'yup';
 import reducers from './reducers';
+import pluginPermissions from './permissions';
 
 const name = pluginPkg.strapi.displayName;
 
@@ -28,13 +29,7 @@ export default {
 
         return component;
       },
-      permissions: [
-        // Uncomment to set the permissions of the plugin here
-        // {
-        //   action: '', // the action name should be plugin::plugin-name.actionType
-        //   subject: null,
-        // },
-      ],
+      permissions: pluginPermissions.moderate,
     });
     app.addReducers(reducers);
     app.registerPlugin({

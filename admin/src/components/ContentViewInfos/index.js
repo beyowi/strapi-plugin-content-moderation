@@ -1,9 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import _ from 'lodash';
 import {
+  LoadingIndicatorPage,
   useCMEditViewDataManager,
   useNotification,
+  useRBAC,
 } from '@strapi/helper-plugin';
 import { Button } from '@strapi/design-system/Button';
 import { Box } from '@strapi/design-system/Box';
@@ -17,6 +19,7 @@ import Clock from '@strapi/icons/Clock';
 import { getMessage } from '../../utils';
 import { MODERATION_STATUS } from '../../utils/constants';
 import { changeContentStatus } from '../../utils/api';
+import pluginPermissions from '../../permissions';
 
 const ContentViewInfos = () => {
   const { initialData, modifiedData, isCreatingEntry, slug, layout } =
@@ -29,6 +32,19 @@ const ContentViewInfos = () => {
   ) {
     return null;
   }
+
+  const viewPermissions = useMemo(
+    () => ({
+      pending: pluginPermissions.pending,
+      moderate: pluginPermissions.moderate,
+    }),
+    []
+  );
+
+  const {
+    isLoading: isLoadingForPermissions,
+    allowedActions: { canPending, canModerate },
+  } = useRBAC(viewPermissions);
 
   const history = useHistory();
 
@@ -71,6 +87,10 @@ const ContentViewInfos = () => {
     history.go(0);
   }, [modifiedData, slug]);
 
+  const approveBtnText = getMessage('page.viewer.table.action.approved');
+  const pendingBtnText = getMessage('page.viewer.table.action.pending');
+  const rejectBtnText = getMessage('page.viewer.table.action.rejected');
+
   return (
     <Box
       as='aside'
@@ -110,36 +130,45 @@ const ContentViewInfos = () => {
             </div>
           </div>
         )}
-        {initialData.moderationStatus !== MODERATION_STATUS.APPROVED ? (
-          <Button
-            startIcon={<Check />}
-            variant='success'
-            fullWidth
-            onClick={onApproveClick}
-          >
-            {getMessage('page.viewer.table.action.approved')}
-          </Button>
-        ) : null}
-        {initialData.moderationStatus !== MODERATION_STATUS.PENDING ? (
-          <Button
-            startIcon={<Clock />}
-            variant='secondary'
-            fullWidth
-            onClick={onPendingClick}
-          >
-            {getMessage('page.viewer.table.action.pending')}
-          </Button>
-        ) : null}
-        {initialData.moderationStatus !== MODERATION_STATUS.REJECTED ? (
-          <Button
-            startIcon={<Cross />}
-            variant='danger'
-            fullWidth
-            onClick={onRejectClick}
-          >
-            {getMessage('page.viewer.table.action.rejected')}
-          </Button>
-        ) : null}
+        {isLoadingForPermissions ? (
+          <LoadingIndicatorPage />
+        ) : (
+          <>
+            {canModerate &&
+            initialData.moderationStatus !== MODERATION_STATUS.APPROVED ? (
+              <Button
+                startIcon={<Check />}
+                variant='success'
+                fullWidth
+                onClick={onApproveClick}
+              >
+                {approveBtnText}
+              </Button>
+            ) : null}
+            {canPending &&
+            initialData.moderationStatus !== MODERATION_STATUS.PENDING ? (
+              <Button
+                startIcon={<Clock />}
+                variant='secondary'
+                fullWidth
+                onClick={onPendingClick}
+              >
+                {pendingBtnText}
+              </Button>
+            ) : null}
+            {canModerate &&
+            initialData.moderationStatus !== MODERATION_STATUS.REJECTED ? (
+              <Button
+                startIcon={<Cross />}
+                variant='danger'
+                fullWidth
+                onClick={onRejectClick}
+              >
+                {rejectBtnText}
+              </Button>
+            ) : null}
+          </>
+        )}
       </Stack>
     </Box>
   );
