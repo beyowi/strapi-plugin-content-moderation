@@ -1,6 +1,6 @@
 {
-  "name": "strapi-plugin-content-moderation",
-  "version": "0.1.0",
+  "name": "@beyowi/strapi-plugin-content-moderation",
+  "version": "0.1.2",
   "description": "This plugin allow the moderation of content types",
   "strapi": {
     "name": "content-moderation",
@@ -8,27 +8,12 @@
     "description": "This plugin allow the moderation of content types",
     "kind": "plugin"
   },
-  "author": {
-    "name": "Beyowi",
-    "email": "info@beyowi.com",
-    "url": "https://beyowi.com/"
-  },
+  "author": "Beyowi <info@beyowi.com> (https://beyowi.com/)",
   "maintainers": [
-    {
-      "name": "Beyowi",
-      "email": "info@beyowi.com",
-      "url": "https://beyowi.com/"
-    },
-    {
-      "name": "Cedric Tang",
-      "email": "cedric@beyowi.com",
-      "url": "https://beyowi.com/"
-    }
+    "Beyowi <info@beyowi.com> (https://beyowi.com/)",
+    "Cedric Tang <cedric@beyowi.com> (https://beyowi.com/)"
   ],
   "main": "strapi-admin.js",
-  "scripts": {
-    "postinstall": "husky install"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/beyowi/strapi-plugin-content-moderation.git"
@@ -53,10 +38,6 @@
     "@strapi/utils": "^4.0.7",
     "lodash": "^4.17.21"
   },
-  "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
-    "husky": "^7.0.4"
-  },
+  "devDependencies": {},
   "license": "MIT"
 }
