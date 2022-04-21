@@ -1,5 +1,5 @@
 {
-  "name": "@beyowi/strapi-plugin-content-moderation",
+  "name": "strapi-plugin-content-moderation",
   "version": "0.1.0",
   "description": "This plugin allow the moderation of content types",
   "strapi": {
@@ -27,8 +27,7 @@
   ],
   "main": "strapi-admin.js",
   "scripts": {
-    "postinstall": "husky install",
-    "publish": "npm publish --tag latest"
+    "postinstall": "husky install"
   },
   "repository": {
     "type": "git",
@@ -48,7 +47,7 @@
     "npm": ">=7.x.x"
   },
   "peerDependencies": {
-    "@strapi/strapi": "4.x"
+    "@strapi/strapi": "^4.0.0"
   },
   "dependencies": {
     "@strapi/utils": "^4.0.7",

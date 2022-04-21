@@ -17,8 +17,8 @@ This plugin enables your team to moderate other users' new content entries for a
 ## 🧑‍💻 Install
 
 ```
-npm i @beyowi/strapi-plugin-content-moderation
-yarn add @beyowi/strapi-plugin-content-moderation
+npm i strapi-plugin-content-moderation
+yarn add strapi-plugin-content-moderation
 ```
 
 After successful installation, run:
@@ -97,9 +97,3 @@ Feature / Capability focused permissions:
 ## 📝 License
 
 [MIT License](LICENSE.md) Copyright (c) [Beyowi](https://beyowi.com/)
-
-## Keywords
-
-- [strapi](https://www.npmjs.com/search?q=keywords:strapi)
-- [plugin](https://www.npmjs.com/search?q=keywords:plugin)
-- [moderation](https://www.npmjs.com/search?q=keywords:moderation)
