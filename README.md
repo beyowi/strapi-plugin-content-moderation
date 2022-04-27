@@ -78,6 +78,10 @@ module.exports = ({ env }) => ({
 - `contentLabel` - List of fields that will be used to label your content in notification emails. The first field defined in your content will be used. `*` is defined for all content types. You can define label fields per content types. For example: `"Post": ["Title", "customField"]`
 - `contentListFields` - List of fields that will be displayed in the content list visible in the moderation panel. `*` is defined for all content types. You can define label fields per content types. For example: `"Post": ["Title", "customField", "createdAt"]`
 
+## Extensions
+
+You can customize the email templates by overriding the files contained in `server/config/email-templates` in your application.
+
 ## 👤 RBAC
 
 Plugin provides granular permissions based on Strapi RBAC functionality.
