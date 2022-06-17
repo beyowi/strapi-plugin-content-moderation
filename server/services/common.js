@@ -63,11 +63,22 @@ module.exports = ({ strapi }) => ({
 
   // Change content status
   async updateStatus(slug, contentId, newStatus) {
+    const content = await strapi.entityService.findOne(slug, contentId);
+
+    let data = {
+      moderationStatus: newStatus,
+    };
+
+    if (content.publishedAt !== undefined) {
+      if (newStatus == MODERATION_STATUS.APPROVED && !content.publishedAt) {
+        data.publishedAt = Date.now();
+      } else {
+        data.publishedAt = null;
+      }
+    }
     const response = await strapi.db.query(slug).update({
       where: { id: contentId },
-      data: {
-        moderationStatus: newStatus,
-      },
+      data,
       populate: { createdBy: true },
     });
 

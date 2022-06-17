@@ -30,23 +30,9 @@ export const changeContentStatus = async (
   toggleNotification,
   slug,
   id,
-  status,
-  publishedAt
+  status
 ) => {
   try {
-    // Some content might not be publishable (like Users for example)
-    if (publishedAt !== undefined) {
-      if (status == MODERATION_STATUS.APPROVED && !publishedAt) {
-        await axiosInstance.post(
-          `/content-manager/collection-types/${slug}/${id}/actions/publish`
-        );
-      } else if (status != MODERATION_STATUS.APPROVED && publishedAt !== null) {
-        await axiosInstance.post(
-          `/content-manager/collection-types/${slug}/${id}/actions/unpublish`
-        );
-      }
-    }
-
     const response = await axiosInstance.post(
       `/${pluginId}/${slug}/${id}/${status}`
     );

@@ -55,8 +55,7 @@ const ContentViewInfos = () => {
       toggleNotification,
       slug,
       id,
-      MODERATION_STATUS.APPROVED,
-      publishedAt
+      MODERATION_STATUS.APPROVED
     );
     history.go(0);
   }, [modifiedData, slug]);
@@ -68,8 +67,7 @@ const ContentViewInfos = () => {
       toggleNotification,
       slug,
       id,
-      MODERATION_STATUS.PENDING,
-      publishedAt
+      MODERATION_STATUS.PENDING
     );
     history.go(0);
   }, [modifiedData, slug]);
@@ -81,8 +79,7 @@ const ContentViewInfos = () => {
       toggleNotification,
       slug,
       id,
-      MODERATION_STATUS.REJECTED,
-      publishedAt
+      MODERATION_STATUS.REJECTED
     );
     history.go(0);
   }, [modifiedData, slug]);

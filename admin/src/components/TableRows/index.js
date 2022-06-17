@@ -73,7 +73,6 @@ const TableRows = ({
                       actionStatus={MODERATION_STATUS.APPROVED}
                       refetchData={refetchData}
                       icon={<Check />}
-                      publishedAt={data.publishedAt}
                     />
                   ) : null}
                   {data.moderationStatus !== MODERATION_STATUS.PENDING ? (
@@ -84,7 +83,6 @@ const TableRows = ({
                         actionStatus={MODERATION_STATUS.PENDING}
                         refetchData={refetchData}
                         icon={<Clock />}
-                        publishedAt={data.publishedAt}
                       />
                     </Box>
                   ) : null}
@@ -96,7 +94,6 @@ const TableRows = ({
                         actionStatus={MODERATION_STATUS.REJECTED}
                         refetchData={refetchData}
                         icon={<Cross />}
-                        publishedAt={data.publishedAt}
                       />
                     </Box>
                   ) : null}
