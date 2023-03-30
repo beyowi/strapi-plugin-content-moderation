@@ -1,8 +1,8 @@
-const subject = `Content approved`;
+const subject = `Alumni CSF - Votre contenu a été approuvé`;
 
-const html = `<h1>Content approved</h1><p>Your <%= contentType %> \"<%= label %>\" has been approved.<p>`;
+const html = `<p>Bonjour,</p><p>Nous vous remercions d’avoir publié sur la plateforme Alumni CSF ! Votre contenu "<%= label %>" a été approuvé et se trouve à présent en ligne.</p><p>Une question ? N’hésitez pas à nous écrire à alumnicsf@cjfcb.com</p><p>À très bientôt,</p><p>L’équipe Alumni CSF</p>`;
 
-const text = `Thank you for your contribution!\n\nYour <%= contentType %> \"<%= label %>\" has been approved.`;
+const text = `Bonjour,\n\nNous vous remercions d’avoir publié sur la plateforme Alumni CSF ! Votre contenu \"<%= label %>\" a été approuvé et se trouve à présent en ligne.\n\nUne question ? N’hésitez pas à nous écrire à alumnicsf@cjfcb.com\n\nÀ très bientôt,\nL’équipe Alumni CSF`;
 
 module.exports = {
   subject,

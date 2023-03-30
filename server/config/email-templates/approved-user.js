@@ -1,8 +1,8 @@
-const subject = `Subscription approved`;
+const subject = `Alumni CSF - Confirmation de la création de votre compte`;
 
-const html = `<h1>Subscription approved</h1><p>Your subscription has been approved.<p>`;
+const html = `<p>Bonjour,</p><p>Nous avons le plaisir de vous informer que votre compte a été approuvé. Bienvenue dans votre communauté Alumni CSF !</p><p>Vous pouvez dès maintenant vous connecter à votre compte, explorer et publier sur la plateforme ainsi que découvrir l’espace Alumni privé.</p><p>Une question ? N’hésitez pas à nous écrire à alumnicsf@cjfcb.com</p><p>À très bientôt,</p><p>L’équipe Alumni CSF</p>`;
 
-const text = `Subscription approved\n\nYour subscription has been approved.`;
+const text = `Bonjour,\n\nNous avons le plaisir de vous informer que votre compte a été approuvé. Bienvenue dans votre communauté Alumni CSF !\n\nVous pouvez dès maintenant vous connecter à votre compte, explorer et publier sur la plateforme ainsi que découvrir l’espace Alumni privé.\n\nUne question ? N’hésitez pas à nous écrire à alumnicsf@cjfcb.com\n\nÀ très bientôt,\nL’équipe Alumni CSF`;
 
 module.exports = {
   subject,
