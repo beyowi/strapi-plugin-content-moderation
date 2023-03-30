@@ -64,7 +64,7 @@ module.exports = ({ strapi }) => ({
   // Change content status
   async updateStatus(slug, contentId, newStatus) {
     const content = await strapi.entityService.findOne(slug, contentId, {
-      populate: { createdBy: true },
+      populate: { auteur: true },
     });
 
     let data = {
@@ -111,7 +111,7 @@ module.exports = ({ strapi }) => ({
           const contentTypeData =
             getService('content-types').getContentTypeData(slug);
 
-          emailAddr = content.createdBy.email;
+          emailAddr = content.auteur.email;
           emailTemplate =
             newStatus === MODERATION_STATUS.APPROVED
               ? approvedContentTemplate

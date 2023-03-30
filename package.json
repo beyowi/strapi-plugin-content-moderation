@@ -1,6 +1,6 @@
 {
   "name": "@beyowi/strapi-plugin-content-moderation",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "This plugin allow the moderation of content types",
   "strapi": {
     "name": "content-moderation",
