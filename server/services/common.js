@@ -63,7 +63,9 @@ module.exports = ({ strapi }) => ({
 
   // Change content status
   async updateStatus(slug, contentId, newStatus) {
-    const content = await strapi.entityService.findOne(slug, contentId);
+    const content = await strapi.entityService.findOne(slug, contentId, {
+      populate: { createdBy: true },
+    });
 
     let data = {
       moderationStatus: newStatus,
@@ -79,7 +81,6 @@ module.exports = ({ strapi }) => ({
     const response = await strapi.db.query(slug).update({
       where: { id: contentId },
       data,
-      populate: { createdBy: true },
     });
 
     const configEmail = this.getConfig('sendNotificationEmail', false);
@@ -91,7 +92,7 @@ module.exports = ({ strapi }) => ({
 
       if (newStatus != MODERATION_STATUS.PENDING) {
         if (slug === 'plugin::users-permissions.user') {
-          emailAddr = response.email;
+          emailAddr = content.email;
           emailTemplate =
             newStatus === MODERATION_STATUS.APPROVED
               ? approvedUserTemplate
@@ -101,16 +102,16 @@ module.exports = ({ strapi }) => ({
           const labelFields =
             slug in labelConfig ? labelConfig[slug] : labelConfig['*'];
           contentLabel = first(
-            Object.keys(response)
+            Object.keys(content)
               .filter((_) => labelFields === _ || labelFields.includes(_))
-              .map((_) => response[_])
+              .map((_) => content[_])
               .filter((_) => _)
           );
 
           const contentTypeData =
             getService('content-types').getContentTypeData(slug);
 
-          emailAddr = response.createdBy.email;
+          emailAddr = content.createdBy.email;
           emailTemplate =
             newStatus === MODERATION_STATUS.APPROVED
               ? approvedContentTemplate
